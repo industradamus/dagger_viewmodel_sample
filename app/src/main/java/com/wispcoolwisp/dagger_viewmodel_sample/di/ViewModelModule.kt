@@ -9,13 +9,13 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class ViewModelModule {
+interface ViewModelModule {
 
     @Binds
     @IntoMap
     @ViewModelKey(CocaColaViewModel::class)
-    abstract fun bindUserViewModel(cocaColaViewModel: CocaColaViewModel): ViewModel
+    fun bindUserViewModel(cocaColaViewModel: CocaColaViewModel): ViewModel
 
     @Binds
-    abstract fun bindViewModelFactory(factory: CocaColaViewModelFactory): ViewModelProvider.Factory
+    fun bindViewModelFactory(factory: CocaColaViewModelFactory): ViewModelProvider.Factory
 }
