@@ -1,6 +1,8 @@
 package com.wispcoolwisp.dagger_viewmodel_sample.di
 
+import androidx.lifecycle.ViewModel
 import com.wispcoolwisp.dagger_viewmodel_sample.MainActivity
+import com.wispcoolwisp.dagger_viewmodel_sample.viewmodel.CocaColaViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.AndroidInjector
@@ -13,6 +15,6 @@ abstract class MainActivityModule {
 
     @Binds
     @IntoMap
-    @ClassKey(MainActivity::class)
-    abstract fun bindAndroidInjectorFactory(factory: MainActivitySubComponent.Factory): AndroidInjector.Factory<*>
+    @ViewModelKey(CocaColaViewModel::class)
+    abstract fun bindUserViewModel(cocaColaViewModel: CocaColaViewModel): ViewModel
 }

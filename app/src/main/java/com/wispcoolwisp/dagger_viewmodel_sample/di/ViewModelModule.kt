@@ -12,10 +12,5 @@ import dagger.multibindings.IntoMap
 interface ViewModelModule {
 
     @Binds
-    @IntoMap
-    @ViewModelKey(CocaColaViewModel::class)
-    fun bindUserViewModel(cocaColaViewModel: CocaColaViewModel): ViewModel
-
-    @Binds
     fun bindViewModelFactory(factory: CocaColaViewModelFactory): ViewModelProvider.Factory
 }

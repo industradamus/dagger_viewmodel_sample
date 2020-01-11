@@ -8,7 +8,7 @@ import javax.inject.Singleton
 @Module(includes = [ViewModelModule::class])
 class AppModule {
 
-    @Singleton
+    @AppScope
     @Provides
     fun provideDataSource(): DataSource = DataSource()
 }

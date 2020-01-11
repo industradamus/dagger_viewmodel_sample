@@ -8,10 +8,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.wispcoolwisp.dagger_viewmodel_sample.CocaColaApp
 import dagger.android.AndroidInjection
-import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 
 object AppInjector {
+
     fun init(cocaColaApp: CocaColaApp) {
         DaggerAppComponent
             .builder()
