@@ -2,25 +2,47 @@ package com.wispcoolwisp.dagger_viewmodel_sample
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.wispcoolwisp.dagger_viewmodel_sample.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.wispcoolwisp.dagger_viewmodel_sample.di.Injectable
+import com.wispcoolwisp.dagger_viewmodel_sample.di.ViewModelClassMap
+import com.wispcoolwisp.dagger_viewmodel_sample.viewmodel.CocaColaViewModel
+import com.wispcoolwisp.dagger_viewmodel_sample.viewmodel.CocaColaViewModelImpl
+import kotlinx.android.synthetic.main.fragment_fragment_one.*
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class FragmentOne : Fragment() {
+class FragmentOne : Fragment(), Injectable {
+
+    private lateinit var cocaColaViewModel: CocaColaViewModel
+    private lateinit var classMap: ViewModelClassMap
+    private lateinit var factory: ViewModelProvider.Factory
+
+    @Inject
+    fun inject(classMap: ViewModelClassMap, factory: ViewModelProvider.Factory) {
+        this.classMap = classMap
+        this.factory = factory
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fragment_one, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        cocaColaViewModel.textLivaData.observe(this, Observer {
+            text_view.text = it
+        })
+        button.setOnClickListener { cocaColaViewModel.getCola() }
+    }
 }

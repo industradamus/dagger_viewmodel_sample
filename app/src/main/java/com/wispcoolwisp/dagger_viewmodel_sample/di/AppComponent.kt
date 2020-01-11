@@ -9,9 +9,10 @@ import dagger.android.AndroidInjectionModule
 @AppScope
 @Component(
     modules = [
-        AndroidInjectionModule::class,
         AppModule::class,
-        ActivityBuilder::class]
+        AndroidInjectionModule::class,
+        ActivityInjectionModule::class,
+        ViewModelModule::class]
 )
 interface AppComponent {
 
