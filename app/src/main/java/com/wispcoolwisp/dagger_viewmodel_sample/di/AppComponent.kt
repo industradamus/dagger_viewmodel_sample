@@ -18,23 +18,19 @@ package com.wispcoolwisp.dagger_viewmodel_sample.di
 
 import android.app.Application
 import com.wispcoolwisp.dagger_viewmodel_sample.CocaColaApp
-import com.wispcoolwisp.dagger_viewmodel_sample.MainActivity
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
-import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
         AndroidInjectionModule::class,
-        AppModule::class,
-        MainActivityModule::class]
+        AppModule::class, ActivityBuilder::class]
 )
 interface AppComponent {
-
-    interface Factory : AndroidInjector.Factory<MainActivity>
 
     @Component.Builder
     interface Builder {
@@ -45,6 +41,4 @@ interface AppComponent {
     }
 
     fun inject(cocaColaApp: CocaColaApp)
-
-    fun inject(mainActivity: MainActivity)
 }

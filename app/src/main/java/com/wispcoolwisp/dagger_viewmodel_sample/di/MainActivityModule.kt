@@ -14,5 +14,5 @@ abstract class MainActivityModule {
     @Binds
     @IntoMap
     @ClassKey(MainActivity::class)
-    abstract fun bindYourAndroidInjectorFactory(factory: AppComponent.Factory): AndroidInjector.Factory<*>
+    abstract fun bindAndroidInjectorFactory(factory: MainActivitySubComponent.Factory): AndroidInjector.Factory<*>
 }
