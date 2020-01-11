@@ -1,6 +1,7 @@
 package com.wispcoolwisp.dagger_viewmodel_sample
 
 import android.app.Application
+import com.wispcoolwisp.dagger_viewmodel_sample.di.AppInjector
 import com.wispcoolwisp.dagger_viewmodel_sample.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -14,13 +15,8 @@ class CocaColaApp : Application(), HasAndroidInjector {
 
     override fun onCreate() {
         super.onCreate()
-        DaggerAppComponent
-            .builder()
-            .application(this)
-            .build()
-            .inject(this)
+        AppInjector.init(this)
     }
-
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 }
