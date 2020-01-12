@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.wispcoolwisp.dagger_viewmodel_sample.di.Injectable
-import com.wispcoolwisp.dagger_viewmodel_sample.di.ViewModelClassMap
+import com.wispcoolwisp.dagger_viewmodel_sample.di.modules.ViewModelClassMap
+import com.wispcoolwisp.dagger_viewmodel_sample.di.modules.getImplClass
 import com.wispcoolwisp.dagger_viewmodel_sample.viewmodel.CocaColaViewModel
-import com.wispcoolwisp.dagger_viewmodel_sample.viewmodel.CocaColaViewModelImpl
-import kotlinx.android.synthetic.main.fragment_fragment_two.button
-import kotlinx.android.synthetic.main.fragment_fragment_two.text_view
+import kotlinx.android.synthetic.main.fragment_fragment_two.*
 import javax.inject.Inject
 
 /**
@@ -21,7 +21,11 @@ import javax.inject.Inject
  */
 class FragmentTwo : Fragment(), Injectable {
 
-    private lateinit var cocaColaViewModel: CocaColaViewModel
+    private val cocaColaViewModel: CocaColaViewModel by lazy {
+        ViewModelProviders
+            .of(requireActivity(), factory)
+            .get(classMap.getImplClass<CocaColaViewModel>(CocaColaViewModel::class.java))
+    }
     private lateinit var classMap: ViewModelClassMap
     private lateinit var factory: ViewModelProvider.Factory
 

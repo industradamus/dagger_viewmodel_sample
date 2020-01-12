@@ -1,4 +1,4 @@
-package com.wispcoolwisp.dagger_viewmodel_sample.di
+package com.wispcoolwisp.dagger_viewmodel_sample.di.scope
 
 import javax.inject.Scope
 

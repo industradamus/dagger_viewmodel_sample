@@ -1,10 +1,11 @@
-package com.wispcoolwisp.dagger_viewmodel_sample.di
+package com.wispcoolwisp.dagger_viewmodel_sample.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.wispcoolwisp.dagger_viewmodel_sample.DataSource
 import com.wispcoolwisp.dagger_viewmodel_sample.MainActivity
+import com.wispcoolwisp.dagger_viewmodel_sample.di.ViewModelKey
 import com.wispcoolwisp.dagger_viewmodel_sample.viewmodel.CocaColaViewModel
 import com.wispcoolwisp.dagger_viewmodel_sample.viewmodel.CocaColaViewModelImpl
 import dagger.Module
@@ -23,7 +24,7 @@ abstract class ViewModelModule {
     class InjectViewModel {
         // Define the return type to be the abstraction, but ViewModelProviders 'gets' the implementation
         @Provides
-        fun mainViewModel(
+        fun cocaColaViewModel(
             factory: ViewModelProvider.Factory,
             target: MainActivity
         ): CocaColaViewModel =
@@ -36,11 +37,8 @@ abstract class ViewModelModule {
     class ProvideViewModelAbstractionMap {
         @Provides
         fun viewModelClassMap(): ViewModelClassMap =
-            mapOf(
-                CocaColaViewModel::class.java to CocaColaViewModelImpl::class.java
-            )
+            mapOf(CocaColaViewModel::class.java to CocaColaViewModelImpl::class.java)
     }
-
 
     @Module
     class ProvideViewModel {
@@ -48,7 +46,7 @@ abstract class ViewModelModule {
         @IntoMap
         @ViewModelKey(CocaColaViewModel::class)
         // another small alteration, using the abstract class as the ViewModelKey and return type
-        fun mainViewModel(dataSource: DataSource): CocaColaViewModel =
+        fun cocaColaViewModel(dataSource: DataSource): ViewModel =
             CocaColaViewModelImpl(dataSource)
     }
 }
