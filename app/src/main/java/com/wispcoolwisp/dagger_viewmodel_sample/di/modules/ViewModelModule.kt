@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.wispcoolwisp.dagger_viewmodel_sample.DataSource
 import com.wispcoolwisp.dagger_viewmodel_sample.MainActivity
 import com.wispcoolwisp.dagger_viewmodel_sample.di.ViewModelKey
+import com.wispcoolwisp.dagger_viewmodel_sample.extensions.ViewModelClassMap
 import com.wispcoolwisp.dagger_viewmodel_sample.viewmodel.CocaColaViewModel
 import com.wispcoolwisp.dagger_viewmodel_sample.viewmodel.CocaColaViewModelImpl
 import dagger.Module
@@ -28,8 +29,7 @@ abstract class ViewModelModule {
             factory: ViewModelProvider.Factory,
             target: MainActivity
         ): CocaColaViewModel =
-            ViewModelProviders.of(target, factory)
-                .get(CocaColaViewModelImpl::class.java)
+            ViewModelProviders.of(target, factory).get(CocaColaViewModelImpl::class.java)
     }
 
     // Used so fragments can get the ViewModel from their activity without knowing what the implementation is
@@ -50,10 +50,3 @@ abstract class ViewModelModule {
             CocaColaViewModelImpl(dataSource)
     }
 }
-
-typealias ViewModelClassMap = Map<Class<out ViewModel>, @JvmSuppressWildcards Class<out ViewModel>>
-
-// This extension is used next
-@Suppress("UNCHECKED_CAST")
-inline fun <reified T : ViewModel> ViewModelClassMap.getImplClass(clazz: Class<out ViewModel>): Class<T> =
-    requireNotNull(get(clazz)) as Class<T>

@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.wispcoolwisp.dagger_viewmodel_sample.di.Injectable
-import com.wispcoolwisp.dagger_viewmodel_sample.di.modules.ViewModelClassMap
-import com.wispcoolwisp.dagger_viewmodel_sample.di.modules.getImplClass
+import com.wispcoolwisp.dagger_viewmodel_sample.extensions.ViewModelClassMap
+import com.wispcoolwisp.dagger_viewmodel_sample.extensions.sharedViewModel
 import com.wispcoolwisp.dagger_viewmodel_sample.viewmodel.CocaColaViewModel
 import kotlinx.android.synthetic.main.fragment_fragment_one.*
 import javax.inject.Inject
@@ -21,18 +20,13 @@ import javax.inject.Inject
  */
 class FragmentOne : Fragment(), Injectable {
 
-    private val cocaColaViewModel: CocaColaViewModel by lazy {
-        ViewModelProviders
-            .of(requireActivity(), factory)
-            .get(classMap.getImplClass<CocaColaViewModel>(CocaColaViewModel::class.java))
-    }
-    private lateinit var classMap: ViewModelClassMap
-    private lateinit var factory: ViewModelProvider.Factory
-
     @Inject
-    fun inject(classMap: ViewModelClassMap, factory: ViewModelProvider.Factory) {
-        this.classMap = classMap
-        this.factory = factory
+    lateinit var classMap: ViewModelClassMap
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+
+    private val cocaColaViewModel: CocaColaViewModel by lazy {
+        sharedViewModel<CocaColaViewModel>(factory, classMap)
     }
 
     override fun onCreateView(

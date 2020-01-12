@@ -23,7 +23,7 @@ class AppModule {
                 val creator = providers[modelClass] ?: providers
                     .asIterable()
                     .firstOrNull { it.key.isAssignableFrom(modelClass) }
-                    ?.value ?: throw IllegalArgumentException("unknown model class $modelClass")
+                    ?.value ?: throw IllegalArgumentException("Unknown model class $modelClass")
 
                 try {
                     @Suppress("UNCHECKED_CAST")

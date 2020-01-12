@@ -4,21 +4,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.wispcoolwisp.dagger_viewmodel_sample.di.Injectable
 import com.wispcoolwisp.dagger_viewmodel_sample.viewmodel.CocaColaViewModel
-import com.wispcoolwisp.dagger_viewmodel_sample.viewmodel.CocaColaViewModelImpl
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), Injectable {
 
-    private lateinit var cocaColaViewModel: CocaColaViewModel
-
     @Inject
-    fun inject(viewModel: CocaColaViewModel) {
-        cocaColaViewModel = viewModel
-    }
+    lateinit var cocaColaViewModel: CocaColaViewModel
 
     private var count = false
 
@@ -38,7 +32,7 @@ class MainActivity : AppCompatActivity(), Injectable {
         return if (count) {
             count = !count
             FragmentOne()
-        } else{
+        } else {
             count = !count
             FragmentTwo()
         }
